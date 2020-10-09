@@ -25,8 +25,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0912867b-76a6-4b13-957c-9ec9f963798c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__close-button/pop-up__close-button.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__container/pop-up__container.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__description/pop-up__description.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__form/pop-up__form.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__header/pop-up__header.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__name/pop-up__name.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__submit/pop-up__submit.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/__text-input/pop-up__text-input.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/_opened/pop-up_opened.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blocks/pop-up/pop-up.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blocks/footer/__copyright/footer__copyright.css" beforeDir="false" afterPath="$PROJECT_DIR$/blocks/footer/__copyright/footer__copyright.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.css" afterDir="false" />
     </list>
