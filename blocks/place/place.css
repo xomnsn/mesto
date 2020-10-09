@@ -1,0 +1,7 @@
+.place {
+  box-sizing: border-box;
+  width: 100%;
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+}
