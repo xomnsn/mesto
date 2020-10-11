@@ -10,3 +10,12 @@
   border-radius: 10px;
   padding: 34px 36px 36px 36px;
 }
+
+@media screen and (max-width: 540px){
+  .pop-up__container {
+    transform: translateX(0);
+    width: auto;
+    left: 20px;
+    right: 20px;
+  }
+}
