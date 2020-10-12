@@ -21,4 +21,4 @@
 * БЭМ
 * Event listeners & handlers
 * Figma
-* GitHub Pages
+* [GitHub Pages](https://xomnsn.github.io/mesto/)
