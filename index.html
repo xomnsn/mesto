@@ -10,19 +10,19 @@
   <header class="header">
     <a href="#" class="header__logo"></a>
   </header>
-  <main>
+  <main class="page__main">
     <section class="profile page__profile">
       <div class="profile__user">
         <img src="./images/avatar.png" alt="Жак-Ив Кусто" class="profile__avatar">
         <div class="profile__info">
           <div class="profile__row">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button type="button" aria-label="Редактировать данные пользователя"class="profile__edit-button"></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
       </div>
-      <button type="button" class="profile__add-button"></button>
+      <button type="button" aria-label="Добавить место" class="profile__add-button"></button>
     </section>
     <section class="page__places places">
       <ul class="places__elements">
@@ -30,42 +30,42 @@
           <img src="./images/places/gansu.jpg" alt="Цветные скалы Чжанъе Данксиа в провинции Ганьсу, Китай" class="place__picture">
           <div class="place__footer">
             <h2 class="place__title">Чжанъе Данксиа, Китай</h2>
-            <button type="button" class="place__like-button"></button>
+            <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/places/li-river.jpg" alt="Река Ли, Китай" class="place__picture">
           <div class="place__footer">
             <h2 class="place__title">Река Ли, Китай</h2>
-            <button type="button" class="place__like-button"></button>
+            <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/places/yosemite.jpg" alt="Долина Йосемити, США" class="place__picture">
           <div class="place__footer">
             <h2 class="place__title">Йосемити, США</h2>
-            <button type="button" class="place__like-button"></button>
+            <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/places/hitachi-park.jpg" alt="Национальный приморский парк Хитачи, Япония" class="place__picture">
           <div class="place__footer">
             <h2 class="place__title">Хитачи, Япония</h2>
-            <button type="button" class="place__like-button"></button>
+            <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/places/bamboo-forest.jpg" alt="Бамбуковый лес, Япония" class="place__picture">
           <div class="place__footer">
             <h2 class="place__title">Бамбуковый лес, Япония</h2>
-            <button type="button" class="place__like-button"></button>
+            <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
           </div>
         </li>
         <li class="place">
           <img src="./images/places/tulip-fields.jpg" alt="Поля тюльпанов в Нидерландах" class="place__picture">
           <div class="place__footer">
             <h2 class="place__title">Поля тюльпанов, Нидерланды</h2>
-            <button type="button" class="place__like-button"></button>
+            <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
           </div>
         </li>
       </ul>
@@ -78,11 +78,11 @@
     <div class="pop-up__container">
       <h2 class="pop-up__header">Редактировать профиль</h2>
       <form action="#" class="pop-up__form" name="user-info">
-        <input type="text" name="name" value="Жак-Ив Кусто" class="pop-up__name pop-up__text-input pop-up__text-input_type_name">
-        <input type="text" name="description" value="Исследователь океана" class="pop-up__description pop-up__text-input pop-up__text-input_type_description">
+        <input type="text" name="name" value="Жак-Ив Кусто" required placeholder="Имя" class="pop-up__name pop-up__text-input pop-up__text-input_type_name">
+        <input type="text" name="description" value="Исследователь океана" required placeholder="Описание" class="pop-up__description pop-up__text-input pop-up__text-input_type_description">
         <button type="submit" class="pop-up__submit">Сохранить</button>
       </form>
-      <button type="button" class="pop-up__close-button"></button>
+      <button type="button" aria-label="Закрыть окно редактирования профиля" class="pop-up__close-button"></button>
     </div>
   </div>
   <script src="scripts/script.js"></script>
