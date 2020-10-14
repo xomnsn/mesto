@@ -6,7 +6,7 @@
   background-image: url('../../../images/like.svg');
   background-size: cover;
   border: none;
-  background-color: #FFFFFF;
+  background-color: transparent;
   padding: 0;
   margin-left: 30px;
   transition: opacity ease .4s;

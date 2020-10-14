@@ -1,8 +1,5 @@
 .pop-up__container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   box-sizing: border-box;
   width: 430px;
   background: #FFFFFF;
@@ -13,9 +10,6 @@
 
 @media screen and (max-width: 540px){
   .pop-up__container {
-    transform: translate(0, -50%);
-    width: auto;
-    left: 20px;
-    right: 20px;
+    margin: 0 20px;
   }
 }
