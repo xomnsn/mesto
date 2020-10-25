@@ -51,6 +51,11 @@ function addPlace(title, imgSrc) {
   const newPlace = placeTemplate.cloneNode(true);
   const placeTitle = newPlace.querySelector('.place__title');
   const placeImg = newPlace.querySelector('.place__picture');
+  const likeBtn = newPlace.querySelector('.place__like-button');
+  const deleteBtn = newPlace.querySelector('.place__delete-button');
+
+  likeBtn.addEventListener('click', toggleLike);
+  deleteBtn.addEventListener('click', removePlace)
 
   placeTitle.textContent = title;
   placeImg.src = imgSrc;
@@ -59,17 +64,17 @@ function addPlace(title, imgSrc) {
   places.prepend(newPlace);
 }
 
-function onEditBtn() {
+function openEditUserPopup() {
   editUserNameInput.value = profileName.textContent;
   editUserDescriptionInput.value = profileDescription.textContent;
   editUserPopup.classList.add('pop-up_opened');
 }
 
-function onAddBtn() {
+function openAddPlacePopup() {
   addPlacePopup.classList.add('pop-up_opened');
 }
 
-function onClosePopup(evt) {
+function closePopup(evt) {
   const popup = evt.target.closest('.pop-up')
   popup.classList.remove('pop-up_opened');
 }
@@ -78,21 +83,30 @@ function editUserSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = editUserNameInput.value;
   profileDescription.textContent = editUserDescriptionInput.value;
-  onClosePopup(evt);
+  closePopup(evt);
 }
 
 function addPlaceSubmitHandler (evt) {
   evt.preventDefault();
   addPlace(addPlaceTitleInput.value, addPlaceSrcInput.value);
-  onClosePopup(evt);
+  closePopup(evt);
+}
+
+function toggleLike (evt) {
+  evt.target.classList.toggle('place__like-button_liked');
+}
+
+function removePlace (evt) {
+  const card = evt.target.closest('.place');
+  card.remove();
 }
 
 initialCards.forEach(place => addPlace(place.name, place.link));
 
-editUserBtn.addEventListener('click', onEditBtn);
-editUserCLoseBtn.addEventListener('click', onClosePopup);
+editUserBtn.addEventListener('click', openEditUserPopup);
+editUserCLoseBtn.addEventListener('click', closePopup);
 editUserForm.addEventListener('submit', editUserSubmitHandler);
 
-addPlaceBtn.addEventListener('click', onAddBtn);
-addPlaceCLoseBtn.addEventListener('click', onClosePopup);
+addPlaceBtn.addEventListener('click', openAddPlacePopup);
+addPlaceCLoseBtn.addEventListener('click', closePopup);
 addPlaceForm.addEventListener('submit', addPlaceSubmitHandler);
