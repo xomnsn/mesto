@@ -83,7 +83,7 @@ function editUserSubmitHandler (evt) {
 
 function addPlaceSubmitHandler (evt) {
   evt.preventDefault();
-
+  addPlace(addPlaceTitleInput.value, addPlaceSrcInput.value);
   onClosePopup(evt);
 }
 
