@@ -38,7 +38,6 @@
 
 @import url('../blocks/pop-up/pop-up.css');
 @import url('../blocks/pop-up/_opened/pop-up_opened.css');
-@import url('../blocks/pop-up/_closing/pop-up_closing.css');
 @import url('../blocks/pop-up/__container/pop-up__container.css');
 @import url('../blocks/pop-up/__header/pop-up__header.css');
 @import url('../blocks/pop-up/__form/pop-up__form.css');
