@@ -77,6 +77,8 @@
   }
 
   function openAddPlacePopup() {
+    addPlaceTitleInput.value = '';
+    addPlaceSrcInput.value = '';
     addPlacePopup.classList.add('pop-up_opened');
   }
 
