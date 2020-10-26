@@ -44,3 +44,9 @@
 @import url('../blocks/pop-up/__text-input/pop-up__text-input.css');
 @import url('../blocks/pop-up/__submit/pop-up__submit.css');
 @import url('../blocks/pop-up/__close-button/pop-up__close-button.css');
+
+@import url('../blocks/image-view/image-view.css');
+@import url('../blocks/image-view/__figure/image-view__figure.css');
+@import url('../blocks/image-view/__image/image-view__image.css');
+@import url('../blocks/image-view/__caption/image-view__caption.css');
+@import url('../blocks/image-view/__close-button/image-view__close-button.css');

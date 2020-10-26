@@ -1,0 +1,15 @@
+.image-view {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+@media screen and (max-width: 540px){
+  .image-view {
+    margin: 0 20px;
+  }
+}
