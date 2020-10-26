@@ -24,7 +24,11 @@
   const viewImagePicture = viewImagePopup.querySelector('.image-view__image');
   const viewImageCaption = viewImagePopup.querySelector('.image-view__caption');
 
-  function addPlace(title, imgSrc) {
+  function addPlace(newPlace) {
+    places.prepend(newPlace);
+  }
+
+  function createPlace(title, imgSrc) {
     const newPlace = placeTemplate.cloneNode(true);
     const placeTitle = newPlace.querySelector('.place__title');
     const placeImg = newPlace.querySelector('.place__picture');
@@ -40,7 +44,7 @@
     placeImg.src = imgSrc;
     placeImg.alt = title;
 
-    places.prepend(newPlace);
+    return newPlace;
   }
 
   function openEditUserPopup() {
@@ -69,7 +73,8 @@
 
   function addPlaceSubmitHandler (evt) {
     evt.preventDefault();
-    addPlace(addPlaceTitleInput.value, addPlaceSrcInput.value);
+    const newPlace = createPlace(addPlaceTitleInput.value, addPlaceSrcInput.value);
+    addPlace(newPlace);
     closePopup(evt);
   }
 
@@ -94,7 +99,10 @@
     viewImagePopup.classList.add('pop-up_opened');
   }
 
-  initialCards.forEach(place => addPlace(place.name, place.link));
+  initialCards.forEach(place => {
+    const newPlace = createPlace(place.name, place.link);
+    addPlace(newPlace);
+  });
 
   editUserBtn.addEventListener('click', openEditUserPopup);
   editUserCLoseBtn.addEventListener('click', closePopup);
