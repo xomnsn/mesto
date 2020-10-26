@@ -24,9 +24,6 @@
   const viewImagePicture = viewImagePopup.querySelector('.image-view__image');
   const viewImageCaption = viewImagePopup.querySelector('.image-view__caption');
 
-  function addPlace(newPlace) {
-    places.prepend(newPlace);
-  }
 
   function createPlace(title, imgSrc) {
     const newPlace = placeTemplate.cloneNode(true);
@@ -47,20 +44,15 @@
     return newPlace;
   }
 
-  function openEditUserPopup() {
-    editUserNameInput.value = profileName.textContent;
-    editUserDescriptionInput.value = profileDescription.textContent;
-    editUserPopup.classList.add('pop-up_opened');
+  function addPlace(newPlace) {
+    places.prepend(newPlace);
   }
 
-  function openAddPlacePopup() {
-    addPlaceTitleInput.value = '';
-    addPlaceSrcInput.value = '';
-    addPlacePopup.classList.add('pop-up_opened');
+  function openPopup(popup) {
+    popup.classList.add('pop-up_opened');
   }
 
-  function closePopup(evt) {
-    const popup = evt.target.closest('.pop-up')
+  function closePopup(popup) {
     popup.classList.remove('pop-up_opened');
   }
 
@@ -68,14 +60,12 @@
     evt.preventDefault();
     profileName.textContent = editUserNameInput.value;
     profileDescription.textContent = editUserDescriptionInput.value;
-    closePopup(evt);
   }
 
   function addPlaceSubmitHandler (evt) {
     evt.preventDefault();
     const newPlace = createPlace(addPlaceTitleInput.value, addPlaceSrcInput.value);
     addPlace(newPlace);
-    closePopup(evt);
   }
 
   function toggleLike (evt) {
@@ -96,7 +86,7 @@
     viewImagePicture.alt = title.textContent;
     viewImageCaption.textContent = title.textContent;
 
-    viewImagePopup.classList.add('pop-up_opened');
+    openPopup(viewImagePopup);
   }
 
   initialCards.forEach(place => {
@@ -104,12 +94,36 @@
     addPlace(newPlace);
   });
 
-  editUserBtn.addEventListener('click', openEditUserPopup);
-  editUserCLoseBtn.addEventListener('click', closePopup);
-  editUserForm.addEventListener('submit', editUserSubmitHandler);
+  editUserBtn.addEventListener('click', function () {
+    editUserNameInput.value = profileName.textContent;
+    editUserDescriptionInput.value = profileDescription.textContent;
+    openPopup(editUserPopup);
+  });
 
-  addPlaceBtn.addEventListener('click', openAddPlacePopup);
-  addPlaceCLoseBtn.addEventListener('click', closePopup);
-  addPlaceForm.addEventListener('submit', addPlaceSubmitHandler);
+  editUserCLoseBtn.addEventListener('click', function () {
+    closePopup(editUserPopup);
+  });
 
-  viewImageCLoseBtn.addEventListener('click', closePopup);
+  editUserForm.addEventListener('submit', function () {
+    editUserSubmitHandler();
+    closePopup(editUserPopup);
+  });
+
+  addPlaceBtn.addEventListener('click', function () {
+    addPlaceTitleInput.value = '';
+    addPlaceSrcInput.value = '';
+    openPopup(addPlacePopup);
+  });
+
+  addPlaceCLoseBtn.addEventListener('click', function () {
+    closePopup(addPlacePopup);
+  });
+
+  addPlaceForm.addEventListener('submit', function () {
+    addPlaceSubmitHandler();
+    closePopup(addPlacePopup);
+  });
+
+  viewImageCLoseBtn.addEventListener('click', function () {
+    closePopup(viewImagePopup);
+  });
