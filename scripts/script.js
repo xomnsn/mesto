@@ -17,7 +17,7 @@
   const addPlaceSrcInput = addPlacePopup.querySelector('.pop-up__text-input_type_src');
 
   const places = page.querySelector('.places__elements');
-  const placeTemplate = places.querySelector('#place-template').content;
+  const placeTemplate = page.querySelector('#place-template').content;
 
   const viewImagePopup = page.querySelector('.pop-up_func_img-view');
   const viewImageCLoseBtn = viewImagePopup.querySelector('.pop-up__close-button');
@@ -104,8 +104,8 @@
     closePopup(editUserPopup);
   });
 
-  editUserForm.addEventListener('submit', function () {
-    editUserSubmitHandler();
+  editUserForm.addEventListener('submit', function (evt) {
+    editUserSubmitHandler(evt);
     closePopup(editUserPopup);
   });
 
@@ -119,8 +119,8 @@
     closePopup(addPlacePopup);
   });
 
-  addPlaceForm.addEventListener('submit', function () {
-    addPlaceSubmitHandler();
+  addPlaceForm.addEventListener('submit', function (evt) {
+    addPlaceSubmitHandler(evt);
     closePopup(addPlacePopup);
   });
 

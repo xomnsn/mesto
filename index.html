@@ -26,18 +26,6 @@
     </section>
     <section class="page__places places">
       <ul class="places__elements">
-        <template id="place-template">
-          <li class="place">
-            <div class="place__picture-container">
-              <img src="" alt="" class="place__picture">
-            </div>
-            <div class="place__footer">
-              <h2 class="place__title"></h2>
-              <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
-            </div>
-            <button type="button" aria-label="Удалить место" class="place__delete-button"></button>
-          </li>
-        </template>
       </ul>
     </section>
   </main>
@@ -75,6 +63,18 @@
       <button type="button" aria-label="Закрыть окно добавления места" class="image-view__close-button pop-up__close-button"></button>
     </div>
   </div>
+  <template id="place-template">
+    <li class="place">
+      <div class="place__picture-container">
+        <img src="" alt="" class="place__picture">
+      </div>
+      <div class="place__footer">
+        <h2 class="place__title"></h2>
+        <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
+      </div>
+      <button type="button" aria-label="Удалить место" class="place__delete-button"></button>
+    </li>
+  </template>
   <script src="scripts/initialCards.js"></script>
   <script src="scripts/script.js"></script>
 </body>
