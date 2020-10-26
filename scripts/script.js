@@ -82,7 +82,10 @@
 
   function closePopup(evt) {
     const popup = evt.target.closest('.pop-up')
-    popup.classList.remove('pop-up_opened');
+    popup.classList.add('pop-up_closing');
+    setTimeout(() =>
+      popup.classList.remove('pop-up_opened', 'pop-up_closing'),
+      400);
   }
 
   function editUserSubmitHandler (evt) {
