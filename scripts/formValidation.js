@@ -15,8 +15,10 @@ function hideInputError (formElement, inputElement) {
 function toggleButtonState (inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add('pop-up__submit_disabled');
+    buttonElement.setAttribute('disabled', true);
   } else {
     buttonElement.classList.remove('pop-up__submit_disabled');
+    buttonElement.removeAttribute('disabled');
   }
 }
 
