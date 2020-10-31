@@ -48,7 +48,6 @@
   }
 
   function closePopupOnEsc(evt) {
-    console.log(evt.key);
     if (evt.key === 'Escape') {
       popups.forEach((popup) => {
         if (popup.classList.contains('pop-up_opened')) {
