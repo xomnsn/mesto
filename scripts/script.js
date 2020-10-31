@@ -30,11 +30,10 @@
     const placeImg = newPlace.querySelector('.place__picture');
     const likeBtn = newPlace.querySelector('.place__like-button');
     const deleteBtn = newPlace.querySelector('.place__delete-button');
-    const picture = newPlace.querySelector('.place__picture');
 
     likeBtn.addEventListener('click', toggleLike);
     deleteBtn.addEventListener('click', removePlace);
-    picture.addEventListener('click', viewImage);
+    placeImg.addEventListener('click', () => viewImage(title, imgSrc));
 
     placeTitle.textContent = title;
     placeImg.src = imgSrc;
@@ -49,11 +48,8 @@
 
   function closePopupOnEsc(evt) {
     if (evt.key === 'Escape') {
-      popups.forEach((popup) => {
-        if (popup.classList.contains('pop-up_opened')) {
-          closePopup(popup)
-        }
-      });
+      const openedPopup = document.querySelector('.pop-up_opened');
+      closePopup(openedPopup);
     }
   }
 
@@ -88,14 +84,10 @@
     card.remove();
   }
 
-  function viewImage (evt) {
-    const image = evt.target;
-    const place = image.closest('.place');
-    const title = place.querySelector('.place__title');
-
-    viewImagePicture.src = image.src;
-    viewImagePicture.alt = title.textContent;
-    viewImageCaption.textContent = title.textContent;
+  function viewImage (title, imgSrc) {
+    viewImagePicture.src = imgSrc;
+    viewImagePicture.alt = title;
+    viewImageCaption.textContent = title;
 
     openPopup(viewImagePopup);
   }
