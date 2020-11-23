@@ -1,4 +1,43 @@
-import { initialCards, Card } from "./Card.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
+const INITIAL_CARDS = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const PLACE_TEMPLATE = '#place-template';
+
+const VALIDATION_CONFIG = {
+  formSelector: '.pop-up__form',
+  inputSelector: '.pop-up__text-input',
+  submitButtonSelector: '.pop-up__submit',
+  inactiveButtonClass: 'pop-up__submit_disabled',
+  inputErrorClass: 'pop-up__text-input_invalid',
+  errorClass: 'pop-up__input-error_active'
+}
 
 const page = document.querySelector('.page')
 const editUserBtn = page.querySelector('.profile__edit-button');
@@ -25,15 +64,13 @@ const viewImageCaption = viewImagePopup.querySelector('.image-view__caption');
 const popups = Array.from(document.querySelectorAll('.pop-up'));
 
 
-function addPlace(newPlace) {
-  places.prepend(newPlace);
+function createPlace(data) {
+  const newPlace = new Card(data, PLACE_TEMPLATE, viewImage);
+  return newPlace.generateCard();
 }
 
-function closePopupOnEsc(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.pop-up_opened');
-    closePopup(openedPopup);
-  }
+function addPlace(newPlace) {
+  places.prepend(newPlace);
 }
 
 function openPopup(popup) {
@@ -46,16 +83,11 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closePopupOnEsc);
 }
 
-function editUserSubmitHandler (evt) {
-  evt.preventDefault();
-  profileName.textContent = editUserNameInput.value;
-  profileDescription.textContent = editUserDescriptionInput.value;
-}
-
-function addPlaceSubmitHandler (evt) {
-  evt.preventDefault();
-  const newPlace = createPlace(addPlaceTitleInput.value, addPlaceSrcInput.value);
-  addPlace(newPlace);
+function closePopupOnEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.pop-up_opened');
+    closePopup(openedPopup);
+  }
 }
 
 function viewImage (title, imgSrc) {
@@ -64,6 +96,18 @@ function viewImage (title, imgSrc) {
   viewImageCaption.textContent = title;
 
   openPopup(viewImagePopup);
+}
+
+function editUserSubmitHandler (evt) {
+  evt.preventDefault();
+  profileName.textContent = editUserNameInput.value;
+  profileDescription.textContent = editUserDescriptionInput.value;
+}
+
+function addPlaceSubmitHandler (evt) {
+  evt.preventDefault();
+  const newPlace = createPlace({name: addPlaceTitleInput.value, link: addPlaceSrcInput.value});
+  addPlace(newPlace);
 }
 
 function setPopupListeners(popup) {
@@ -80,10 +124,18 @@ function setPopupListeners(popup) {
   });
 }
 
-initialCards.forEach(place => {
-  const newPlace = new Card(place, '#place-template', viewImage);
-  const placeElement = newPlace.generateCard();
-  addPlace(placeElement);
+function enableValidation(config) {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const formValidator = new FormValidator(config, formElement);
+    formValidator.enableValidation();
+  });
+}
+
+
+INITIAL_CARDS.forEach(place => {
+  const newPlace = createPlace(place);
+  addPlace(newPlace);
 });
 
 popups.forEach((popup) => setPopupListeners(popup));
@@ -109,3 +161,5 @@ addPlaceForm.addEventListener('submit', function (evt) {
   addPlaceSubmitHandler(evt);
   closePopup(addPlacePopup);
 });
+
+enableValidation(VALIDATION_CONFIG);
