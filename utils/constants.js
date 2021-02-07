@@ -25,8 +25,6 @@ export const INITIAL_CARDS = [
   }
 ];
 
-export const PLACE_TEMPLATE = '#place-template';
-
 export const VALIDATION_CONFIG = {
   formSelector: '.pop-up__form',
   inputSelector: '.pop-up__text-input',
@@ -35,3 +33,15 @@ export const VALIDATION_CONFIG = {
   inputErrorClass: 'pop-up__text-input_invalid',
   errorClass: 'pop-up__input-error_active'
 }
+
+
+export const placeTemplateSelector = '#place-template';
+export const cardContainerSelector = '.places__elements';
+export const profileNameSelector = '.profile__name';
+export const profileBioSelector = '.profile__description';
+export const editUserBtnSelector = '.profile__edit-button';
+export const addPlaceBtnSelector = '.profile__add-button';
+export const imagePopupSelector = '.pop-up_func_img-view';
+export const editUserPopupSelector = '.pop-up_func_edit';
+export const addCardPopupSelector = '.pop-up_func_add';
+
