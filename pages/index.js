@@ -1,43 +1,10 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-
-const INITIAL_CARDS = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-const PLACE_TEMPLATE = '#place-template';
-
-const VALIDATION_CONFIG = {
-  formSelector: '.pop-up__form',
-  inputSelector: '.pop-up__text-input',
-  submitButtonSelector: '.pop-up__submit',
-  inactiveButtonClass: 'pop-up__submit_disabled',
-  inputErrorClass: 'pop-up__text-input_invalid',
-  errorClass: 'pop-up__input-error_active'
-}
+import Card from "../components/Card.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { INITIAL_CARDS, PLACE_TEMPLATE, VALIDATION_CONFIG } from "../utils/constants.js";
 
 const page = document.querySelector('.page')
 const editUserBtn = page.querySelector('.profile__edit-button');
@@ -65,7 +32,7 @@ const popups = Array.from(document.querySelectorAll('.pop-up'));
 
 
 function createPlace(data) {
-  const newPlace = new Card(data, PLACE_TEMPLATE, viewImage);
+  const newPlace = new Card({data: data, handleCardClick: viewImage}, PLACE_TEMPLATE);
   return newPlace.generateCard();
 }
 
