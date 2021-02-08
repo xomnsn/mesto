@@ -1,0 +1,23 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* Найди своё Место https://xomnsn.github.io/mesto/\r * Языки: HTML, CSS, JavaScript.\r * Адаптивная вёрстка с [макета](https://www.figma.com/file/StZjf8HnoeLdiXS7dYrLAh/JavaScript.-Sprint-4?node-id=0%3A1) в Figma",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xomnsn/mesto.git"
+  },
+  "author": "xomnsn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xomnsn/mesto/issues"
+  },
+  "homepage": "https://github.com/xomnsn/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
