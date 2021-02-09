@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -13,7 +12,7 @@
   <main class="page__main">
     <section class="profile page__profile">
       <div class="profile__user">
-        <img src="./images/avatar.png" alt="Жак-Ив Кусто" class="profile__avatar">
+        <img src="<%=require('./images/avatar.png')%>" alt="Жак-Ив Кусто" class="profile__avatar">
         <div class="profile__info">
           <div class="profile__row">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -79,6 +78,5 @@
       <button type="button" aria-label="Удалить место" class="place__delete-button"></button>
     </li>
   </template>
-  <script type="module" src="pages/index.js"></script>
 </body>
 </html>
