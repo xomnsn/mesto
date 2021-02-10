@@ -5,7 +5,10 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    return {name: this._nameEl.textContent, bio: this._bioEl.textContent}
+    return {
+      name: this._nameEl.textContent,
+      bio: this._bioEl.textContent
+    };
   }
 
   setUserInfo({ name, bio }) {

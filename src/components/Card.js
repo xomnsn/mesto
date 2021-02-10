@@ -39,7 +39,7 @@ export default class Card {
   _setEventListeners() {
     this._likeBtnEl.addEventListener('click', this._toggleLike);
     this._deleteBtnEl.addEventListener('click', this._removePlace);
-    this._pictureEl.addEventListener('click', () => this._handleCardClick({ title: this._name, imgSrc: this._src}));
+    this._pictureEl.addEventListener('click', () => this._handleCardClick(this._name, this._src));
   }
 
   generateCard() {

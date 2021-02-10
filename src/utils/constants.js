@@ -44,4 +44,6 @@ export const addPlaceBtnSelector = '.profile__add-button';
 export const imagePopupSelector = '.pop-up_func_img-view';
 export const editUserPopupSelector = '.pop-up_func_edit';
 export const addCardPopupSelector = '.pop-up_func_add';
+export const editUserNameInputSelector = '.pop-up__text-input_type_name';
+export const editUserBioInputSelector = '.pop-up__text-input_type_description';
 
