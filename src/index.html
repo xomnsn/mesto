@@ -12,11 +12,14 @@
   <main class="page__main">
     <section class="profile page__profile">
       <div class="profile__user">
-        <img src="<%=require('./images/avatar.png')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/avatar.png')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+          <button class="profile__edit-avatar"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__row">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="button" aria-label="Редактировать данные пользователя" class="profile__edit-button"></button>
+            <button type="button" aria-label="Редактировать данные пользователя" class="profile__edit-user-info"></button>
           </div>
           <p class="profile__description">Исследователь океана</p>
         </div>
@@ -44,6 +47,17 @@
       <button type="button" aria-label="Закрыть окно редактирования профиля" class="pop-up__close-button"></button>
     </div>
   </div>
+  <div class="pop-up pop-up_func_edit-avatar">
+    <div class="pop-up__container">
+      <h2 class="pop-up__header">Обновить аватар</h2>
+      <form novalidate action="#" class="pop-up__form" name="avatar">
+        <input type="url" name="link" value="" required placeholder="Ссылка на картинку" class="pop-up__text-input pop-up__text-input_type_avatar-src" id="avatar-url">
+        <p class="pop-up__input-error" id="avatar-url-error"></p>
+        <button type="submit" class="pop-up__submit">Сохранить</button>
+      </form>
+      <button type="button" aria-label="Закрыть окно редактирования профиля" class="pop-up__close-button"></button>
+    </div>
+  </div>
   <div class="pop-up pop-up_func_add">
     <div class="pop-up__container">
       <h2 class="pop-up__header">Новое место</h2>
@@ -66,6 +80,13 @@
       <button type="button" aria-label="Закрыть окно добавления места" class="image-view__close-button pop-up__close-button"></button>
     </div>
   </div>
+  <div class="pop-up pop-up_func_confirm">
+    <div class="pop-up__container">
+      <h2 class="pop-up__header">Вы уверены?</h2>
+      <button type="button" class="pop-up__submit">Да</button>
+      <button type="button" aria-label="Закрыть окно" class="image-view__close-button pop-up__close-button"></button>
+    </div>
+  </div>
   <template id="place-template">
     <li class="place">
       <div class="place__picture-container">
@@ -73,7 +94,10 @@
       </div>
       <div class="place__footer">
         <h2 class="place__title"></h2>
-        <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
+        <div class="place__like-container">
+          <button type="button" aria-label="Поставить лайк" class="place__like-button"></button>
+          <p class="place__like-count">0</p>
+        </div>
       </div>
       <button type="button" aria-label="Удалить место" class="place__delete-button"></button>
     </li>

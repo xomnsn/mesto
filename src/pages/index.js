@@ -1,8 +1,11 @@
 import Card from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import ConfirmationPopup from "../components/ConfirmationPopup";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Avatar from "../components/Avatar.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api";
 import FormValidator from "../components/FormValidator.js";
 import {
   INITIAL_CARDS,
@@ -11,13 +14,19 @@ import {
   cardContainerSelector,
   profileNameSelector,
   profileBioSelector,
+  profilePictureSelector,
   editUserBtnSelector,
+  editAvatarBtnSelector,
   addPlaceBtnSelector,
   imagePopupSelector,
+  confirmDeletePopupSelector,
   editUserPopupSelector,
+  editAvatarPopupSelector,
   addCardPopupSelector,
   editUserNameInputSelector,
-  editUserBioInputSelector
+  editUserBioInputSelector,
+  editAvatarInputSelector,
+  apiConfig
 } from "../utils/constants.js";
 
 import './index.css';
@@ -27,7 +36,15 @@ function createCard(data) {
     data: data,
     handleCardClick: (name, link) => {
       popupWithImage.open(name, link);
-    }}, placeTemplateSelector);
+    },
+    handleDeleteClick: (card) => {
+      confirmDeletePopup.changeHandler(() => {
+        card.remove();
+        confirmDeletePopup.close();
+      });
+      confirmDeletePopup.open();
+    }
+  }, placeTemplateSelector);
   return card.generateCard();
 }
 
@@ -40,14 +57,19 @@ function enableValidation(config) {
 }
 
 const editUserBtn = document.querySelector(editUserBtnSelector);
+const editAvatarBtn = document.querySelector(editAvatarBtnSelector);
 const addPlaceBtn = document.querySelector(addPlaceBtnSelector);
 const editUserNameInput = document.querySelector(editUserNameInputSelector);
 const editUserBioInput = document.querySelector(editUserBioInputSelector);
+const editAvatarInput = document.querySelector(editAvatarInputSelector);
+
+const api = new Api(apiConfig);
 
 const userInfo = new UserInfo({
   nameSelector: profileNameSelector,
   bioSelector: profileBioSelector
 });
+const avatar = new Avatar(profilePictureSelector);
 const cardSection = new Section(
   {
     items: INITIAL_CARDS,
@@ -59,6 +81,17 @@ const cardSection = new Section(
   cardContainerSelector
 );
 const popupWithImage = new PopupWithImage(imagePopupSelector);
+const confirmDeletePopup = new ConfirmationPopup(confirmDeletePopupSelector);
+const editAvatarPopup = new PopupWithForm(
+  editAvatarPopupSelector,
+  (inputValues) => {
+    avatar.setSrc(inputValues.link);
+    editAvatarPopup.close();
+  },
+  () => {
+    editAvatarInput.value = avatar.getSrc();
+  }
+);
 const editInfoPopup = new PopupWithForm(
   editUserPopupSelector,
   (inputValues) => {
@@ -81,15 +114,20 @@ const addCardPopup = new PopupWithForm(
 cardSection.renderItems();
 
 editInfoPopup.setEventListeners();
+editAvatarPopup.setEventListeners();
+confirmDeletePopup.setEventListeners();
 popupWithImage.setEventListeners();
 addCardPopup.setEventListeners();
 
 editUserBtn.addEventListener('click', () => {
   editInfoPopup.open();
 });
-
+editAvatarBtn.addEventListener('click', () => {
+  editAvatarPopup.open();
+});
 addPlaceBtn.addEventListener('click', () => {
   addCardPopup.open();
-})
+});
+
 
 enableValidation(VALIDATION_CONFIG);

@@ -1,9 +1,10 @@
 export default class Card {
-  constructor({ data, handleCardClick }, templateSelector) {
+  constructor({ data, handleCardClick, handleDeleteClick }, templateSelector) {
     this._name = data.name;
     this._src = data.link;
     this._cardSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
 
     this._element = null;
     this._titleEl = null;
@@ -38,7 +39,7 @@ export default class Card {
 
   _setEventListeners() {
     this._likeBtnEl.addEventListener('click', this._toggleLike);
-    this._deleteBtnEl.addEventListener('click', this._removePlace);
+    this._deleteBtnEl.addEventListener('click', evt => this._handleDeleteClick(evt.target.closest('.place')));
     this._pictureEl.addEventListener('click', () => this._handleCardClick(this._name, this._src));
   }
 

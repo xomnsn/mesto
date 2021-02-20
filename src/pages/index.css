@@ -13,11 +13,13 @@
 
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__user/profile__user.css');
+@import url('../blocks/profile/__avatar-container/profile__avatar-container.css');
+@import url('../blocks/profile/__edit-avatar/profile__edit-avatar.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__row/profile__row.css');
 @import url('../blocks/profile/__name/profile__name.css');
-@import url('../blocks/profile/__edit-button/profile__edit-button.css');
+@import url('../blocks/profile/__edit-user-info/profile__edit-user-info.css');
 @import url('../blocks/profile/__description/profile__description.css');
 @import url('../blocks/profile/__add-button/profile__add-button.css');
 
@@ -29,7 +31,9 @@
 @import url('../blocks/place/__picture-container/place__picture-container.css');
 @import url('../blocks/place/__picture/place__picture.css');
 @import url('../blocks/place/__title/place__title.css');
+@import url('../blocks/place/__like-container/place__like-container.css');
 @import url('../blocks/place/__like-button/place__like-button.css');
+@import url('../blocks/place/__like-count/place__like-count.css');
 @import url('../blocks/place/__like-button/_liked/place__like-button_liked.css');
 @import url('../blocks/place/__delete-button/place__delete-button.css');
 
