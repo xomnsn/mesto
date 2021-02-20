@@ -13,15 +13,15 @@
     <section class="profile page__profile">
       <div class="profile__user">
         <div class="profile__avatar-container">
-          <img src="<%=require('./images/avatar.png')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+          <img src="" alt="" class="profile__avatar">
           <button class="profile__edit-avatar"></button>
         </div>
         <div class="profile__info">
           <div class="profile__row">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" aria-label="Редактировать данные пользователя" class="profile__edit-user-info"></button>
           </div>
-          <p class="profile__description">Исследователь океана</p>
+          <p class="profile__description"></p>
         </div>
       </div>
       <button type="button" aria-label="Добавить место" class="profile__add-button"></button>
@@ -40,7 +40,7 @@
       <form novalidate action="#" class="pop-up__form" name="user-info">
         <input type="text" name="name" required minlength="2" maxlength="40" placeholder="Имя" class="pop-up__text-input pop-up__text-input_type_name" id="user-name">
         <p class="pop-up__input-error" id="user-name-error">Ошибка</p>
-        <input type="text" name="bio" required minlength="2" maxlength="200" placeholder="Описание" class="pop-up__text-input pop-up__text-input_type_description" id="user-description">
+        <input type="text" name="about" required minlength="2" maxlength="200" placeholder="Описание" class="pop-up__text-input pop-up__text-input_type_description" id="user-description">
         <p class="pop-up__input-error" id="user-description-error">Ошибка</p>
         <button type="submit" class="pop-up__submit">Сохранить</button>
       </form>

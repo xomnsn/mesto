@@ -8,7 +8,6 @@ import Section from "../components/Section.js";
 import Api from "../components/Api";
 import FormValidator from "../components/FormValidator.js";
 import {
-  INITIAL_CARDS,
   VALIDATION_CONFIG,
   placeTemplateSelector,
   cardContainerSelector,
@@ -31,21 +30,42 @@ import {
 
 import './index.css';
 
-function createCard(data) {
+function createCard(data, currentUserId) {
   const card = new Card({
     data: data,
+    handleLikeClick: (cardId, likes, updateLikes, toggleLike) => {
+      if (!likes.map(user => user._id).includes(currentUserId)) {
+        api.likeCard(cardId)
+          .then(card => {
+            updateLikes(card.likes);
+            toggleLike();
+          })
+          .catch(err => console.log(err + ' Не удалось поставить лайк.'));
+      } else {
+        api.unlikeCard(cardId)
+          .then(card => {
+            updateLikes(card.likes);
+            toggleLike();
+          })
+          .catch(err => console.log(err + ' Не удалось снять лайк.'));
+      }
+    },
     handleCardClick: (name, link) => {
       popupWithImage.open(name, link);
     },
-    handleDeleteClick: (card) => {
+    handleDeleteClick: (cardId, removeCard) => {
       confirmDeletePopup.changeHandler(() => {
-        card.remove();
-        confirmDeletePopup.close();
+        api.deleteCard(cardId)
+          .then(() => {
+            removeCard();
+            confirmDeletePopup.close();
+          })
+          .catch(err => console.log(err + ' Не удалось удалить карточку.'));
       });
       confirmDeletePopup.open();
     }
   }, placeTemplateSelector);
-  return card.generateCard();
+  return card.generateCard(currentUserId);
 }
 
 function enableValidation(config) {
@@ -62,9 +82,6 @@ const addPlaceBtn = document.querySelector(addPlaceBtnSelector);
 const editUserNameInput = document.querySelector(editUserNameInputSelector);
 const editUserBioInput = document.querySelector(editUserBioInputSelector);
 const editAvatarInput = document.querySelector(editAvatarInputSelector);
-
-const api = new Api(apiConfig);
-
 const userInfo = new UserInfo({
   nameSelector: profileNameSelector,
   bioSelector: profileBioSelector
@@ -72,9 +89,9 @@ const userInfo = new UserInfo({
 const avatar = new Avatar(profilePictureSelector);
 const cardSection = new Section(
   {
-    items: INITIAL_CARDS,
+    items: [],
     renderer: (item) => {
-      const card = createCard(item);
+      const card = createCard(item, currentUserId);
       cardSection.addItem(card);
     }
   },
@@ -84,9 +101,14 @@ const popupWithImage = new PopupWithImage(imagePopupSelector);
 const confirmDeletePopup = new ConfirmationPopup(confirmDeletePopupSelector);
 const editAvatarPopup = new PopupWithForm(
   editAvatarPopupSelector,
-  (inputValues) => {
-    avatar.setSrc(inputValues.link);
-    editAvatarPopup.close();
+  (inputValues, restoreBtnText) => {
+    api.changeAvatar({ avatar: inputValues.link })
+      .then((user) => {
+        avatar.setSrc(user.avatar);
+        editAvatarPopup.close();
+      })
+      .catch(err => console.log(err + ' Не удалось обновить аватар.'))
+      .finally(restoreBtnText);
   },
   () => {
     editAvatarInput.value = avatar.getSrc();
@@ -94,24 +116,32 @@ const editAvatarPopup = new PopupWithForm(
 );
 const editInfoPopup = new PopupWithForm(
   editUserPopupSelector,
-  (inputValues) => {
-    userInfo.setUserInfo(inputValues);
-    editInfoPopup.close();
+  (inputValues, restoreBtnText) => {
+    api.editUser(inputValues)
+      .then(data => {
+        userInfo.setUserInfo(data);
+        editInfoPopup.close();
+      })
+      .catch(err => console.log(err + ' Не удалось изменить данные пользователя.'))
+      .finally(restoreBtnText);
   },
   () => {
     const info = userInfo.getUserInfo();
     editUserNameInput.value = info.name;
-    editUserBioInput.value = info.bio;
+    editUserBioInput.value = info.about;
   });
 const addCardPopup = new PopupWithForm(
   addCardPopupSelector,
-  (inputValues) => {
-    const card = createCard(inputValues);
-    cardSection.addItemAsFirst(card);
-    addCardPopup.close();
+  (inputValues, restoreBtnText) => {
+    api.addCard(inputValues)
+      .then(data => {
+        const card = createCard(data, currentUserId);
+        cardSection.addItemAsFirst(card);
+        addCardPopup.close();
+      })
+      .catch(err => console.log(err + ' Не удалось добавить карточку.'))
+      .finally(restoreBtnText);
   });
-
-cardSection.renderItems();
 
 editInfoPopup.setEventListeners();
 editAvatarPopup.setEventListeners();
@@ -129,5 +159,26 @@ addPlaceBtn.addEventListener('click', () => {
   addCardPopup.open();
 });
 
+const api = new Api(apiConfig);
+let currentUserId;
+
+api.getUser()
+  .then(data => {
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about,
+    });
+    avatar.setSrc(data.avatar);
+    currentUserId = data._id;
+  })
+  .catch(err => console.log(err));
+
+api.getInitialCards()
+  .then(cards => {
+    cards.forEach(data =>
+        cardSection.addItem(createCard(data, currentUserId))
+      )
+  })
+  .catch(err => console.log(err + ' Не удалось загрузить места.'))
 
 enableValidation(VALIDATION_CONFIG);
