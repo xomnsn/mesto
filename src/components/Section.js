@@ -5,6 +5,10 @@ export default class Section {
     this._renderer = renderer;
   }
 
+  set items(items) {
+    this._items = items;
+  }
+
   addItem(item) {
     this._container.append(item);
   }

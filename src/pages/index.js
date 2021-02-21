@@ -3,7 +3,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import ConfirmationPopup from "../components/ConfirmationPopup";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import Avatar from "../components/Avatar.js";
 import Section from "../components/Section.js";
 import Api from "../components/Api";
 import FormValidator from "../components/FormValidator.js";
@@ -84,9 +83,9 @@ const editUserBioInput = document.querySelector(editUserBioInputSelector);
 const editAvatarInput = document.querySelector(editAvatarInputSelector);
 const userInfo = new UserInfo({
   nameSelector: profileNameSelector,
-  bioSelector: profileBioSelector
+  bioSelector: profileBioSelector,
+  avatarSelector: profilePictureSelector,
 });
-const avatar = new Avatar(profilePictureSelector);
 const cardSection = new Section(
   {
     items: [],
@@ -104,14 +103,14 @@ const editAvatarPopup = new PopupWithForm(
   (inputValues, restoreBtnText) => {
     api.changeAvatar({ avatar: inputValues.link })
       .then((user) => {
-        avatar.setSrc(user.avatar);
+        userInfo.setAvatarSrc(user.avatar);
         editAvatarPopup.close();
       })
       .catch(err => console.log(err + ' Не удалось обновить аватар.'))
       .finally(restoreBtnText);
   },
   () => {
-    editAvatarInput.value = avatar.getSrc();
+    editAvatarInput.value = userInfo.getAvatarSrc();
   }
 );
 const editInfoPopup = new PopupWithForm(
@@ -162,23 +161,26 @@ addPlaceBtn.addEventListener('click', () => {
 const api = new Api(apiConfig);
 let currentUserId;
 
-api.getUser()
-  .then(data => {
+const userDataPromise = api.getUser();
+const initialCardsPromise = api.getInitialCards();
+
+Promise.all([userDataPromise, initialCardsPromise])
+  .then(res => {
+    const userData = res[0];
+    const cards = res[1];
+
+    currentUserId = userData._id;
+
     userInfo.setUserInfo({
-      name: data.name,
-      about: data.about,
+      name: userData.name,
+      about: userData.about,
     });
-    avatar.setSrc(data.avatar);
-    currentUserId = data._id;
+    userInfo.setAvatarSrc(userData.avatar);
+
+    cardSection.items = cards;
+    cardSection.renderItems();
   })
   .catch(err => console.log(err));
 
-api.getInitialCards()
-  .then(cards => {
-    cards.forEach(data =>
-        cardSection.addItem(createCard(data, currentUserId))
-      )
-  })
-  .catch(err => console.log(err + ' Не удалось загрузить места.'))
 
 enableValidation(VALIDATION_CONFIG);
